@@ -130,7 +130,7 @@ class Variable:
     def get_unit_vector(self):
         global unit_mapping
         vector = np.zeros(0)
-        
+
         for unit in self.units:
             if unit.unit not in unit_mapping:
                 raise ValueError(f"Unknown unit")
@@ -153,8 +153,8 @@ class Parser(object):
 
         self.current_token = self.tokens[self.i]
 
-    def error(self):
-        raise Exception('Invalid syntax')
+    def error(self, expected, got):
+        raise Exception(f'Invalid syntax. Expected{expected}, but got {got}.')
 
     def eat(self, token_type):
         # compare the current token type with the passed token
@@ -165,7 +165,7 @@ class Parser(object):
         if self.current_token.type == token_type:
             self.next_token()
         else:
-            self.error()
+            self.error(self.current_token.type, token_type)
 
     def equation(self):
         """
@@ -213,6 +213,7 @@ class Parser(object):
             else:
                 self.eat(LPAREN)
                 power = self.current_token.value
+                self.eat(NUM)
                 self.eat(RPAREN)
         else:
             power = 1
