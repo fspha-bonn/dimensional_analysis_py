@@ -1,3 +1,16 @@
+unit_mapping = {
+    "s": 0,
+    "m": 1,
+    "kg": 2,
+    "A": 3,
+    "K": 4,
+    "mol": 5,
+    "cd": 6
+}
+
+import numpy as np
+
+
 ###########
 #  LEXER  #
 ###########
@@ -113,6 +126,18 @@ class Variable:
 
     def __repr__(self):
         return self.__str__()
+
+    def get_unit_vector(self):
+        global unit_mapping
+        vector = np.zeros(0)
+        
+        for unit in self.units:
+            if unit.unit not in unit_mapping:
+                raise ValueError(f"Unknown unit")
+
+            vector[unit_mapping[unit.unit]] += unit.power
+
+        return vector
 
 class Parser(object):
 
