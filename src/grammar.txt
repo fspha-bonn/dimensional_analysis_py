@@ -1,0 +1,9 @@
+Example:
+  c=15kg^(-1)*m^(-2)*s^(4)*A^(2)
+  c=15 kg^(-1) m^(-2) s^4 A^2
+
+whitespace=" *\t"
+
+equation: WORD EQ NUM term
+term: unit term*
+unit: WORD (POW (LPAREN NUM RPAREN | NUM))*
