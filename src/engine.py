@@ -1,6 +1,6 @@
 import numpy as np
 
-def get_powers(base, goal):
+def analyze(base, goal):
     """
     Arguments:
         base    List of base vectors in row form

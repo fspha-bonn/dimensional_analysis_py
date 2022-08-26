@@ -194,5 +194,11 @@ class Parser(object):
 
         return Unit(unit, power)
 
-    def parse(self):
+    def parse_eq(self):
         return self.equation()
+
+def get_var(arg):
+    lexer = Lexer(arg)
+    tokens = lexer.tokenize()
+    parser = Parser(tokens)
+    return parser.parse_eq()
