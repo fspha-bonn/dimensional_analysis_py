@@ -29,7 +29,7 @@ def analyze(base, goal):
         return 1, None
 
     #invert Matrix
-    N = np.linalg.inv(M)
+    M_rev = np.linalg.inv(M)
 
     # calculate powers
-    return 0, np.dot(N , goal)
+    return 0, np.dot(M_rev, goal)

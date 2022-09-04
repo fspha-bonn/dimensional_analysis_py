@@ -115,6 +115,28 @@ class Unit:
     def __repr__(self):
         return self.__str__()
 
+class GoalUnits:
+    def __init__(self, units):
+        self.units = units
+
+    def get_unit_vector(self):
+        global unit_mapping
+        vector = np.zeros(7)
+
+        for unit in self.units:
+            if unit.unit not in unit_mapping:
+                raise ValueError(f"Unknown unit {unit}")
+
+            vector[unit_mapping[unit.unit]] += unit.power
+
+        return vector
+
+    def __str__(self):
+        return f"Units: {self.units}"
+
+    def __repr__(self):
+        return self.__str__()
+
 class Variable:
     def __init__(self, name, value, units):
         self.name = name
@@ -129,11 +151,11 @@ class Variable:
 
     def get_unit_vector(self):
         global unit_mapping
-        vector = np.zeros(0)
+        vector = np.zeros(7)
 
         for unit in self.units:
             if unit.unit not in unit_mapping:
-                raise ValueError(f"Unknown unit")
+                raise ValueError(f"Unknown unit {unit}")
 
             vector[unit_mapping[unit.unit]] += unit.power
 
@@ -154,7 +176,7 @@ class Parser(object):
         self.current_token = self.tokens[self.i]
 
     def error(self, expected, got):
-        raise Exception(f'Invalid syntax. Expected{expected}, but got {got}.')
+        raise Exception(f'Invalid syntax. Expected {expected}, but got {got}.')
 
     def eat(self, token_type):
         # compare the current token type with the passed token
@@ -165,7 +187,7 @@ class Parser(object):
         if self.current_token.type == token_type:
             self.next_token()
         else:
-            self.error(self.current_token.type, token_type)
+            self.error(token_type, self.current_token.type)
 
     def equation(self):
         """
@@ -216,15 +238,25 @@ class Parser(object):
                 self.eat(NUM)
                 self.eat(RPAREN)
         else:
-            power = 1
+            power = 1.0
 
         return Unit(unit, power)
 
     def parse_eq(self):
         return self.equation()
 
+    def parse_units(self):
+        return GoalUnits(self.term())
+
+
 def get_var(arg):
     lexer = Lexer(arg)
     tokens = lexer.tokenize()
     parser = Parser(tokens)
     return parser.parse_eq()
+
+def get_units(arg):
+    lexer = Lexer(arg)
+    tokens = lexer.tokenize()
+    parser = Parser(tokens)
+    return parser.parse_units()
