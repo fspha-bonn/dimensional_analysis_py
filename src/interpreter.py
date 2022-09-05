@@ -19,12 +19,12 @@ def get_powers(variable_objects, goal_object):
         log("Too few strings, padding with identity matrix...")
         #vectors += [[0]*7]*(7-len(variable_objects))
         pad = np.identity(7)[len(variable_objects):,:]
-        print(f"padding: {pad}")
+        #print(f"padding: {pad}")
         vectors = np.concatenate((vectors, pad), axis = 0)
 
-    print(vectors)
+    #print(vectors)
     goal = goal_object.get_unit_vector()
-    print(goal)
+    #print(goal)
 
     return engine.analyze(vectors, goal)
 
