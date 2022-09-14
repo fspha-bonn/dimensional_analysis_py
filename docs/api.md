@@ -69,3 +69,27 @@ The `Unit(obj)` class has the following functions:
 |      name       |  arguments | description
 |-----------------|------------|------------
 |    \_\_str__    |    self    | Returns String representation of Object. Equivalent to \_\_repr__.
+
+# Interpreter
+
+The interpreter has one function and 3 wrapper functions. It imports the `parser`, the `engine` and `numpy`.
+
+**1) get_powers(variable_objects, target_object)**\
+The `get_powers` function calculates the powers of how to combine a list of `Variable` objects into an object with provided target units as a `TargetUnit` object. It returns a list of floating point numbers where the nth object in that list is the power of the nth variable.
+
+*Arguments*:
+- `variable_objects`: list or iterable of `parser.Variable` objects.
+- `target_object`: a ``get_var_obj(eq_string)`parser.TagetUnit` object.
+
+*Returns*
+- `powers`: `numpy.array` of floats, length 7.
+
+**2) Wrapper functions**
+
+For convenience the Interpreter wraps functions from the parser and engine.
+
+|           Name           | Wrapped Function |
+|--------------------------|------------------|
+| `get_var_obj(eq_string)` | `parser.get_var(eq_string)`
+| `get_units_obj(unit_str)`| `parser.get_units(unit_str)`
+| `calculate(base, target)`| `engine.analyze(base, target)` 
