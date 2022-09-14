@@ -29,6 +29,10 @@ def main():
 
     val = 1
 
+    if l<7 and not all(power[i] == 0 for i in range(l, 7)):
+        print(f"Additional information required.")
+        return
+
     print("target = ", end = "")
     for i in range(l):
         name = vars[i].name
