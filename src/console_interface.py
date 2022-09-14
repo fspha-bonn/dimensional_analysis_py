@@ -23,6 +23,10 @@ def main():
 
     code, powers = intprt.get_powers(vars, goal)
 
+    if code == 1:
+        print("Matrix is not invertible. The provided Vectors may not be linearily independent.")
+        return
+
     val = 1
 
     print("target = ", end = "")
