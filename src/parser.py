@@ -115,7 +115,7 @@ class Unit:
     def __repr__(self):
         return self.__str__()
 
-class GoalUnits:
+class TargetUnits:
     def __init__(self, units):
         self.units = units
 
@@ -246,7 +246,7 @@ class Parser(object):
         return self.equation()
 
     def parse_units(self):
-        return GoalUnits(self.term())
+        return TargetUnits(self.term())
 
 
 def get_var(arg):
