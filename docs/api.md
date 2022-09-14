@@ -77,9 +77,10 @@ The interpreter has one function and 3 wrapper functions. It imports the `parser
 **1) get_powers(variable_objects, target_object)**\
 The `get_powers` function calculates the powers of how to combine a list of `Variable` objects into an object with provided target units as a `TargetUnit` object. It returns a list of floating point numbers where the nth object in that list is the power of the nth variable.
 
-*Arguments*:
-- `variable_objects`: list or iterable of `parser.Variable` objects.
-- `target_object`: a ``get_var_obj(eq_string)`parser.TagetUnit` object.
+| Arguments | Description |
+|-----------|-------------|
+| `variable_objects` | list or iterable of `parser.Variable` objects.
+| `target_object` | a `parser.TagetUnit` object.
 
 *Returns*
 - `powers`: `numpy.array` of floats, length 7.
@@ -92,4 +93,29 @@ For convenience the Interpreter wraps functions from the parser and engine.
 |--------------------------|------------------|
 | `get_var_obj(eq_string)` | `parser.get_var(eq_string)`
 | `get_units_obj(unit_str)`| `parser.get_units(unit_str)`
-| `calculate(base, target)`| `engine.analyze(base, target)` 
+| `calculate(base, target)`| `engine.analyze(base, target)`
+
+# Engine
+The Engine has one function. The engine import `numpy`.
+
+**analyze(base, target)**:\
+Takes a base and a target as 7-dimensional vectors and calculates the factors for each base vector to reach the targets.\
+<img src="https://latex.codecogs.com/gif.latex?B\cdot \vec a = \vec t \implies \vec a = B^{-1}\cdot \vec t" />\
+where `B` is the Base written as a Matrix, `a` is a vector of the factors corresponding to the powers and `t` is the target vector.
+
+| Arguments  | Description |
+|------------|-------------
+|   `base`   | list of 7 base vectors in 7 dimensional unit space.
+|  `target`  |  target point in unit space.
+
+| Return Variable | Description |
+|-----------------|-------------|
+|  `status_code`  | Status code of computation (see below)
+|    `powers`     | Vector `a`, list of factors for every base. Each element in the list corresponds to a power for one of the base vectors.
+
+**List of Status Codes**
+
+| Status Code | Description |
+|-------------|-------------|
+| 0           | This is fine.
+| 1           | Base not linearily independent. Determinant is zero.
