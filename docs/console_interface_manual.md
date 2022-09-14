@@ -2,6 +2,14 @@
 
 The console interface provides a simple and local way to interact with the api. For this manual I will assume python 3.x can be called with `python3`.
 
+## Dependencies
+
+Dependencies show latest tested version. Script may work with older versions, but they are untested.
+
+| Library | Version
+|---------|---------
+| numpy   | >= 1.22.3
+
 ## Using the console interface
 
 ### Starting the script
@@ -56,3 +64,9 @@ Make sure to use only SI-Base units:
 
 ### Output
 The script will guess a solution to the problem using dimensional analysis, display that solution and calculate the target variable using the provided variables.
+
+```
+Variables given: 2
+Too few strings, padding with identity matrix...
+target = x^(1.0) * v^(-1.0) = 0.6666666666666666s
+```
