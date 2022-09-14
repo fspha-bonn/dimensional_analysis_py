@@ -14,7 +14,7 @@ The function `get_var(string_input)` returns a `Variable(obj)` object.
 The input-string must be of the format
 
 ```
-name = [value][unit 1]^[power]*[unit_2]^power*...
+[name] = [value][unit 1]^[power]*[unit_2]^[power]*...
 ```
 
 If the power is one it can be omitted. If a power is given the seperator by * or by a whitespace can be omitted.
