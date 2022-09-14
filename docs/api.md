@@ -100,7 +100,9 @@ The Engine has one function. The engine import `numpy`.
 
 **analyze(base, target)**:\
 Takes a base and a target as 7-dimensional vectors and calculates the factors for each base vector to reach the targets.\
-<img src="https://latex.codecogs.com/gif.latex?B\cdot \vec a = \vec t \implies \vec a = B^{-1}\cdot \vec t" />\
+
+![alttext](https://latex.codecogs.com/gif.latex?B\cdot%20\vec%20a%20=%20\vec%20t%20\implies%20\vec%20a%20=%20B^{-1}\cdot%20\vec%20t)
+
 where `B` is the Base written as a Matrix, `a` is a vector of the factors corresponding to the powers and `t` is the target vector.
 
 | Arguments  | Description |
