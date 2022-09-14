@@ -3,13 +3,13 @@ import parser, engine, numpy as np
 def log(string):
     print(string)
 
-def get_powers(variable_objects, goal_object):
+def get_powers(variable_objects, target_object):
 
     print(f"Variables given: {len(variable_objects)}")
 
     if len(variable_objects) > 7:
         log("Too many strings, aborting")
-        raise Error("To many strings.")
+        raise Error("Too many strings.")
 
     vectors = list()
     for variable in variable_objects:
@@ -23,10 +23,10 @@ def get_powers(variable_objects, goal_object):
         vectors = np.concatenate((vectors, pad), axis = 0)
 
     #print(vectors)
-    goal = goal_object.get_unit_vector()
-    #print(goal)
+    target = target_object.get_unit_vector()
+    #print(target)
 
-    return engine.analyze(vectors, goal)
+    return engine.analyze(vectors, target)
 
 def get_var_obj(eq_string):
     return parser.get_var(eq_string)
@@ -34,5 +34,5 @@ def get_var_obj(eq_string):
 def get_units_obj(unit_str):
     return parser.get_units(unit_str)
 
-def calculate(base, goal):
-    return engine.analyze(base, goal)
+def calculate(base, target):
+    return engine.analyze(base, target)
