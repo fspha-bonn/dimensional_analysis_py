@@ -29,7 +29,7 @@ def main():
 
     val = 1
 
-    if l<7 and not all(power[i] == 0 for i in range(l, 7)):
+    if l<7 and not all(powers[i] == 0 for i in range(l, 7)):
         print(f"Additional information required.")
         return
 
