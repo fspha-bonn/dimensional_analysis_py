@@ -50,10 +50,16 @@ def complete_base(vectors, dim = 7):
     for i in range(n):
         indices[i] = i
 
-
     is_invertible = False
+    count = 0
+    maxcount = (dim-1)**n
 
     while not is_invertible:
+        if count > maxcount:
+            raise ValueError("Could not construct a base. Provided Vectors may dependent.")
+            return
+
+        count += 1
         vec = list(vectors.copy())
         for i in range(n):
             vec.append(E[:,int(indices[i])])
@@ -61,6 +67,7 @@ def complete_base(vectors, dim = 7):
         is_invertible = invertible(vec)
         if not is_invertible:
             indices = __iterate_unique_indices__(indices, dim-1)
+
 
     return np.concatenate([vec], axis = 1).transpose()
 
