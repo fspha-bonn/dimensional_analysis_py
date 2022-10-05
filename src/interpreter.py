@@ -15,12 +15,14 @@ def get_powers(variable_objects, target_object):
     for variable in variable_objects:
         vectors.append(variable.get_unit_vector())
 
-    if len(variable_objects) < 7:
-        log("Too few strings, padding with identity matrix...")
-        #vectors += [[0]*7]*(7-len(variable_objects))
-        pad = np.identity(7)[len(variable_objects):,:]
-        #print(f"padding: {pad}")
-        vectors = np.concatenate((vectors, pad), axis = 0)
+    #if len(variable_objects) < 7:
+    #    log("Too few strings, padding with identity matrix...")
+    #    #vectors += [[0]*7]*(7-len(variable_objects))
+    #    pad = np.identity(7)[len(variable_objects):,:]
+    #    #print(f"padding: {pad}")
+    #    vectors = np.concatenate((vectors, pad), axis = 0)
+
+    vectors = engine.complete_base(vectors)
 
     #print(vectors)
     target = target_object.get_unit_vector()

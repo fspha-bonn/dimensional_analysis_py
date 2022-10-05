@@ -68,8 +68,8 @@ def complete_base(vectors, dim = 7):
         if not is_invertible:
             indices = __iterate_unique_indices__(indices, dim-1)
 
-
-    return np.concatenate([vec], axis = 1).transpose()
+    #return np.concatenate([vec], axis = 1).transpose()
+    return vec
 
 
 def analyze(base, goal):
@@ -87,14 +87,7 @@ def analyze(base, goal):
         1   Base not linearily independent
     """
     #write base as matrix
-    # transpose all base vectors into col-vectors
-    base_vec = list()
-
-    for row_vec in base:
-        col_vec = np.transpose([row_vec])
-        base_vec.append(col_vec)
-
-    M = np.concatenate(base_vec, axis=1)
+    M = np.concatenate([base], axis=1).transpose()
 
     #Test independence
     if np.linalg.det(M) == 0:
