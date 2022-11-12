@@ -7,7 +7,7 @@ def main():
     print("Please enter you variables in the following format:")
     print("<name> = <amount> [units]")
     print("Example: p = 12 kg m^-1 s^(-2)")
-    print("Please make sure to use SI base units.\n")
+    print("Please make sure to use SI units specified in the dimensions file.\n")
     while i < 7:
         in_str = input(f"Variable {i+1}: ")
         if in_str == "":
