@@ -6,4 +6,4 @@ whitespace=" *\t"
 
 equation: WORD EQ NUM term
 term: unit term*
-unit: WORD (POW (LPAREN NUM RPAREN | NUM))*
+unit: DIV* WORD (POW (LPAREN NUM RPAREN | NUM))*

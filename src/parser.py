@@ -25,7 +25,7 @@ unit_mapping = get_dimensions()
 #  LEXER  #
 ###########
 
-WORD, NUM, POW, LPAREN, RPAREN, EQ = ("word", "num", "pow", "lparen", "rparen", "eq")
+WORD, NUM, POW, LPAREN, RPAREN, EQ, DIV = ("word", "num", "pow", "lparen", "rparen", "eq", "div")
 word_allowed = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_"
 whitespace = " *\t"
 
@@ -97,6 +97,10 @@ class Lexer(object):
             elif string[i] == ")":
                 tokens.append(Token(RPAREN, ")"))
                 i += 1
+
+            elif string[i] == "/":
+                tokens.append(Token(DIV, "/"))
+                i+=1
 
             elif string[i] in word_allowed:
                 val, i = self.get_word(i)
@@ -232,8 +236,14 @@ class Parser(object):
 
     def unit(self):
         """
-        unit: WORD (POW (LPAREN NUM RPAREN | NUM))*
+        unit: DIV* WORD (POW (LPAREN NUM RPAREN | NUM))*
         """
+        if self.current_token.type == DIV:
+            div = True
+            self.eat(DIV)
+        else:
+            div = False
+
         unit = self.current_token.value
         self.eat(WORD)
 
@@ -250,6 +260,9 @@ class Parser(object):
                 self.eat(RPAREN)
         else:
             power = 1.0
+
+        if div:
+            power *= -1
 
         return Unit(unit, power)
 
