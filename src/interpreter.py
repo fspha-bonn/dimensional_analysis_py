@@ -5,7 +5,7 @@ def log(string):
 
 def get_powers(variable_objects, target_object):
 
-    print(f"Variables given: {len(variable_objects)}")
+    print(f"Variables given: {len(variable_objects)}, {variable_objects}")
 
     if len(variable_objects) > 7:
         log("Too many strings, aborting")
@@ -13,7 +13,9 @@ def get_powers(variable_objects, target_object):
 
     vectors = list()
     for variable in variable_objects:
-        vectors.append(variable.get_unit_vector())
+        next_vec = variable.get_unit_vector()
+        print(f"{variable} \t -> {next_vec}")
+        vectors.append(next_vec)
 
     #if len(variable_objects) < 7:
     #    log("Too few strings, padding with identity matrix...")

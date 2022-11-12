@@ -1,15 +1,25 @@
-unit_mapping = {
-    "s": 0,
-    "m": 1,
-    "kg": 2,
-    "A": 3,
-    "K": 4,
-    "mol": 5,
-    "cd": 6
-}
-
 import numpy as np
 
+
+def get_dimensions():
+    """
+    Hard coded function that fetches the dict from dimensions.json and converts to numpy arrays.
+    Returns dict
+    """
+
+    import json
+    with open("dimensions.json") as file:
+        unit_vecs = json.load(file)
+
+    #print(json.dumps(unit_vecs, indent = 2))
+
+    for dim in unit_vecs:
+        unit_vecs[dim] = np.array(unit_vecs[dim])
+        #print(f"{dim}:\t{unit_vecs[dim]}")
+
+    return unit_vecs
+
+unit_mapping = get_dimensions()
 
 ###########
 #  LEXER  #
@@ -127,7 +137,8 @@ class TargetUnits:
             if unit.unit not in unit_mapping:
                 raise ValueError(f"Unknown unit {unit}")
 
-            vector[unit_mapping[unit.unit]] += unit.power
+            #print(unit_mapping[unit.unit])
+            vector += unit.power*unit_mapping[unit.unit]
 
         return vector
 
@@ -157,7 +168,7 @@ class Variable:
             if unit.unit not in unit_mapping:
                 raise ValueError(f"Unknown unit {unit}")
 
-            vector[unit_mapping[unit.unit]] += unit.power
+            vector += unit.power*unit_mapping[unit.unit]
 
         return vector
 

@@ -36,6 +36,7 @@ def complete_base(vectors, dim = 7):
     """
 
     n = len(vectors)
+    #print(f"Vectors: {vectors}")
 
     # pick vector from producing system
     # and check whether the resulting system is
@@ -56,7 +57,7 @@ def complete_base(vectors, dim = 7):
 
     while not is_invertible:
         if count > maxcount:
-            raise ValueError("Could not construct a base. Provided Vectors may dependent.")
+            raise ValueError("Could not construct a base. Provided Vectors may be interdependent.")
             return
 
         count += 1
