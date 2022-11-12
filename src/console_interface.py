@@ -30,7 +30,11 @@ def main():
     val = 1
 
     if l<7 and not all(powers[i] == 0 for i in range(l, 7)):
-        print(f"Additional information required.")
+        #units = ["s", "m", "kg", "A", "K", "mol", "cd"]
+        print(f"Additional information required:", end = " ")
+        for i in range(l, 7):
+            print(f"{i}", end = " ") if powers[i] != 0 else None
+        print(f"\n{powers}")
         return
 
     print("target = ", end = "")
